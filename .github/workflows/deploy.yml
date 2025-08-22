@@ -1,8 +1,9 @@
+# .github/workflows/deploy.yml
 name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ "main" ]   # Cambia si usas otra rama
+    branches: [ "main" ]
   workflow_dispatch:
 
 permissions:
@@ -25,13 +26,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
+          # 🔧 Quitamos cache para evitar error por falta de lockfile
 
       - name: Install deps
-        run: npm ci || npm i
+        run: npm install
 
-      # Para que Vite genere paths correctos en Pages: /<repo>/
-      - name: Compute base path
+      - name: Compute base path for Vite
         run: echo "BASE_PATH=/${GITHUB_REPOSITORY#*/}/" >> $GITHUB_ENV
 
       - name: Build (Vite)
@@ -52,3 +52,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
