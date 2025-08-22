@@ -29,5 +29,3 @@ npm run preview
 - `src/index.css` — Tailwind
 - `index.html` — entrada Vite
 
-## Licencia
-MIT
