@@ -26,10 +26,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          # 🔧 Quitamos cache para evitar error por falta de lockfile
+          # cache desactivado si no hay lockfile
 
       - name: Install deps
-        run: npm install
+        run: npm ci || npm i
 
       - name: Compute base path for Vite
         run: echo "BASE_PATH=/${GITHUB_REPOSITORY#*/}/" >> $GITHUB_ENV
